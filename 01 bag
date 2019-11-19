@@ -1,0 +1,29 @@
+#include<iostream>
+#include<algorithm> 
+using namespace std;
+int f[110][1010];
+int v[110],w[110];
+int main(void)
+{
+	int m,t;
+	cin>>t>>m;
+
+	for(int n=1;n<=m;n++)
+	{
+		cin>>v[n]>>w[n];
+	}
+	for(int a=1;a<=m;a++)
+		for(int b=0;b<=t;b++)
+		{
+			f[a][b]=f[a-1][b];
+			if(b>=v[a])
+			{
+				f[a][b]=max(f[a-1][b],f[a-1][b-v[a]]+w[a]);
+			}
+		}
+	int ans=0;
+	for(int x=0;x<=t;x++)ans=max(ans,f[m][x]);
+	cout<<ans<<endl;
+	return 0;
+	
+}
